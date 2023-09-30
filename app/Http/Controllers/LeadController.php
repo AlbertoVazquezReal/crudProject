@@ -2,69 +2,137 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\Lead;
-use App\Models\Client;
 use App\Http\Requests\StoreLeadRequest;
+use Illuminate\Http\JsonResponse;
 use App\Http\Requests\UpdateLeadRequest;
 use App\Repositories\LeadRepository;
 use App\Repositories\ClientRepository;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
+
 
 class LeadController extends Controller
 
+{   
+
+    public function index()
+    {
+        try {
+            $leads = Lead::all();
+        } catch (Exception $e) {
+            return response()->json([
+                'data' => [],
+                'message'=>$e->getMessage()
+            ], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
+        return response()->json([
+            'data' => $leads,
+            'message' => 'Succeed'
+        ], JsonResponse::HTTP_OK);
+    }
+
+
+public function show($id)
 {
-    public function index(): View
+    try {
 
-    {
-        $leads = lead::latest()->paginate(5);
-        return view('leads.index',compact('leads'))
-                    ->with('i', (request()->input('page', 1) - 1) * 5);
+        $lead = Lead::find($id);
+    
+        if($lead){
+            return response()->json([
+                'data' => $lead,
+                'message' => 'Succeed'
+            ], JsonResponse::HTTP_OK);
+        }else{
+            return response()->json([
+                'message' => 'Lead not found.'
+            ], JsonResponse::HTTP_OK);
+        }
 
+    } catch (Exception $e) {
+        return response()->json([
+            'data' => [],
+            'message'=>$e->getMessage()
+        ], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
     }
 
-    public function create(): View
-    {
-        return view('leads.create');
-    }
 
-    public function store(StoreLeadRequest $request, LeadRepository $leadRepository){
+}
 
+public function store(StoreLeadRequest $request)
+{
+    try {
+
+        $leadRepository = new LeadRepository;
         $leadInfo = $leadRepository->create($request);
 
         $clientRepository = new ClientRepository;
         $clientRepository->create($leadInfo);
 
-        return redirect()->route('leads.index')
-                        ->with('Lead creado correctamente.');
+    } catch (Exception $e) {
 
+        return response()->json([
+            'data' => [],
+            'message'=>$e->getMessage()
+        ], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
     }
 
-    public function show(lead $lead): View
-    {
-        return view('leads.show',compact('lead'));
+    return response()->json([
+        'message' => 'Succeed, lead created.'
+    ], JsonResponse::HTTP_OK);
+}
+
+
+public function update(UpdateLeadRequest $request, $id)
+{
+    try {
+
+    $leadId = Lead::find($id);
+    
+    if($leadId){
+
+        $leadRepository = new LeadRepository;
+        $leadRepository->update($request, $leadId);
+
+            return response()->json([
+                'message' => 'Succeed, lead updated.'
+            ], JsonResponse::HTTP_OK);
+    }else{
+            return response()->json([
+                'message' => 'Lead not found.'
+            ], JsonResponse::HTTP_OK);
     }
 
-    public function edit(lead $lead): View
-    {
-        return view('leads.edit',compact('lead'));
+    } catch (Exception $e) {
+        return response()->json([
+            'data' => [],
+            'message'=>$e->getMessage()
+        ], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
+    }
+}
+
+public function destroy($id)
+{
+    try {
+        $lead = Lead::destroy($id);
+    } catch (Exception $e) {
+        return response()->json([
+            'data' => [],
+            'message'=>$e->getMessage()
+        ], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
     }
 
-    public function update(UpdateLeadRequest $request, lead $lead)
-    {
-        $leadRepository = new LeadRepository ;
-        $leadRepository->update($request,$lead);
-
-        return redirect()->route('leads.index')
-                        ->with('Lead actualizado correctamente.');
-
+    if($lead){
+        return response()->json([
+            'message' => 'Succeed, lead deleted.'
+        ], JsonResponse::HTTP_OK);
+    }else{
+        return response()->json([
+            'message' => 'Lead not found.'
+        ], JsonResponse::HTTP_OK);
     }
 
-    public function destroy(Lead $lead, Client $client): RedirectResponse
-    {
-        $lead->delete();
-        $client->delete();
-        return redirect()->route('leads.index')
-                        ->with('Lead eliminado correctamente.');
-    }
+}
+
 }

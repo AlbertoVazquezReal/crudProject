@@ -26,13 +26,11 @@ class LeadRepository{
         
         $leadScoringService = new LeadScoringService;
         $score = $leadScoringService->generateLeadScore();
-
-        $lead->name  = $leadData->name;
+        $lead->name = $leadData->name;
         $lead->email = $leadData->email;
         $lead->phone = $leadData->phone;
         $lead->score = $score;
-        $lead->save();
-
-        return $lead;      
+        $lead->update();
     }
+
 }

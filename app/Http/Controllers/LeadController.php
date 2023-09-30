@@ -13,13 +13,14 @@ use Illuminate\View\View;
 
 class LeadController extends Controller
 
-{
+{   
     public function index(): View
-
     {
-        $leads = lead::latest()->paginate(5);
-        return view('leads.index',compact('leads'))
-                    ->with('i', (request()->input('page', 1) - 1) * 5);
+
+    $leads = lead::latest()->paginate(5);
+
+    return view('leads.index',compact('leads'))
+                ->with('i', (request()->input('page', 1) - 1) * 5);
 
     }
 
@@ -27,6 +28,13 @@ class LeadController extends Controller
     {
         return view('leads.create');
     }
+
+    public function show(lead $lead): View
+    {
+        return view('leads.show',compact('lead'));
+    }
+
+    
 
     public function store(StoreLeadRequest $request, LeadRepository $leadRepository){
 
@@ -37,14 +45,7 @@ class LeadController extends Controller
 
         return redirect()->route('leads.index')
                         ->with('Lead creado correctamente.');
-
     }
-
-    public function show(lead $lead): View
-    {
-        return view('leads.show',compact('lead'));
-    }
-
     public function edit(lead $lead): View
     {
         return view('leads.edit',compact('lead'));
@@ -67,4 +68,5 @@ class LeadController extends Controller
         return redirect()->route('leads.index')
                         ->with('Lead eliminado correctamente.');
     }
+
 }

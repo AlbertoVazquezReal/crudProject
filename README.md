@@ -2,8 +2,11 @@
 
 ### REQUISITOS PARA LA INSTALACIÓN
 
+```
 -Ubuntu 22.04.3 LTS
+
 -PHP 8.1.2
+
 -mariadb Ver 15.1
     -Datos de configuración incluídos en el .env
         DB_CONNECTION=mysql
@@ -12,8 +15,11 @@
         DB_DATABASE=laravel
         DB_USERNAME=root
         DB_PASSWORD=123
+
 -Composer 2.2.6
 -Laravel Framework 10.25.1
+```
+
 ### INSTRUCCIONES PARA LA INSTALACIÓN
 
 -Clonar el proyecto mediante el siguiente comando: 
@@ -46,12 +52,17 @@ Las respuestas y códigos HTML están contempladas en el propio controlador, de 
 
 A nivel Routing, he generado las siguientes rutas para que sea posible consumir los endpoints expuestos:
 
-''GET    - http://127.0.0.1:8000/api/leads      - LISTAR LOS LEADS EXISTENTES.''
-''GET    - http://127.0.0.1:8000/api/leads/{id} - MOSTRAR INFORMACIÓN DEL LEAD SELECCIONADO.''
-''POST   - http://127.0.0.1:8000/api/leads      - CREACIÓN DE UN NUEVO LEAD (PASAR UN OBJETO JSON CON LOS DATOS "name","email", "phone").''
-''PUT    - http://127.0.0.1:8000/api/leads/{id} - EDITARINFORMACIÓN DE UN LEAD (SE TRASLADA EN CASCADA A LOS CLIENTS, PASAR UN OBJETO JSON CON LOS DATOS "name","email", "phone").''
-''DELETE - http://127.0.0.1:8000/api/leads/{id} - ELIMINACIÓN DEL LEAD SELECCIONADO.''
+```
+GET    - http://127.0.0.1:8000/api/leads      - LISTAR LOS LEADS EXISTENTES.
 
+GET    - http://127.0.0.1:8000/api/leads/{id} - MOSTRAR INFORMACIÓN DEL LEAD SELECCIONADO.
+
+POST   - http://127.0.0.1:8000/api/leads      - CREACIÓN DE UN NUEVO LEAD (PASAR UN OBJETO JSON CON LOS DATOS "name","email", "phone").
+
+PUT    - http://127.0.0.1:8000/api/leads/{id} - EDITAR INFORMACIÓN DE UN LEAD (SE TRASLADA EN CASCADA A LOS CLIENTS, PASAR UN OBJETO JSON CON LOS DATOS "name","email", "phone").
+
+DELETE - http://127.0.0.1:8000/api/leads/{id} - ELIMINACIÓN DEL LEAD SELECCIONADO.
+```
 
 
 

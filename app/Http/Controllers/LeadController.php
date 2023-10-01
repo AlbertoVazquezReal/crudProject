@@ -10,7 +10,6 @@ use App\Http\Requests\UpdateLeadRequest;
 use App\Repositories\LeadRepository;
 use App\Repositories\ClientRepository;
 
-
 class LeadController extends Controller
 
 {   

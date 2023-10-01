@@ -64,7 +64,7 @@ PUT    - http://127.0.0.1:8000/api/leads/{id} - EDITAR INFORMACIÓN DE UN LEAD (
 DELETE - http://127.0.0.1:8000/api/leads/{id} - ELIMINACIÓN DEL LEAD SELECCIONADO.
 ```
 
-Los test unitarios realizados con PHPUnit cubren los siguientes supuestos:
+**Los test unitarios realizados con PHPUnit cubren los siguientes supuestos:**
 
 -Lead creado correctamente (Código 201).
 -Error al crear el lead (Código 400).

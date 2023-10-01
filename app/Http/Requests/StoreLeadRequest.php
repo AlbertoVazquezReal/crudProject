@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\JsonResponse;
 
 class StoreLeadRequest extends FormRequest{
 
@@ -21,6 +22,6 @@ public function failedValidation(Validator $validator)
      'success'   => false,
      'message'   => 'Validation errors',
      'data'      => $validator->errors()
-   ]));
+   ],JsonResponse::HTTP_BAD_REQUEST));
 }
 }

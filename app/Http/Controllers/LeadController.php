@@ -28,7 +28,7 @@ class LeadController extends Controller
 
         return response()->json([
             'data' => $leads,
-            'message' => 'Succeed'
+            'message' => 'Succeed.'
         ], JsonResponse::HTTP_OK);
     }
 
@@ -42,22 +42,19 @@ public function show($id)
         if($lead){
             return response()->json([
                 'data' => $lead,
-                'message' => 'Succeed'
+                'message' => 'Succeed.'
             ], JsonResponse::HTTP_OK);
         }else{
             return response()->json([
                 'message' => 'Lead not found.'
-            ], JsonResponse::HTTP_OK);
+            ], JsonResponse::HTTP_NOT_FOUND);
         }
-
     } catch (Exception $e) {
         return response()->json([
             'data' => [],
             'message'=>$e->getMessage()
         ], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
     }
-
-
 }
 
 public function store(StoreLeadRequest $request)
@@ -79,8 +76,8 @@ public function store(StoreLeadRequest $request)
     }
 
     return response()->json([
-        'message' => 'Succeed, lead created.'
-    ], JsonResponse::HTTP_OK);
+        'message' => 'Succeed, lead created.',
+    ], JsonResponse::HTTP_CREATED);
 }
 
 
@@ -101,7 +98,7 @@ public function update(UpdateLeadRequest $request, $id)
     }else{
             return response()->json([
                 'message' => 'Lead not found.'
-            ], JsonResponse::HTTP_OK);
+            ], JsonResponse::HTTP_NOT_FOUND);
     }
 
     } catch (Exception $e) {
@@ -130,7 +127,7 @@ public function destroy($id)
     }else{
         return response()->json([
             'message' => 'Lead not found.'
-        ], JsonResponse::HTTP_OK);
+        ], JsonResponse::HTTP_NOT_FOUND);
     }
 
 }

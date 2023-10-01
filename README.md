@@ -46,11 +46,11 @@ Las respuestas y códigos HTML están contempladas en el propio controlador, de 
 
 A nivel Routing, he generado las siguientes rutas para que sea posible consumir los endpoints expuestos:
 
-GET    - http://127.0.0.1:8000/api/leads      - LISTAR LOS LEADS EXISTENTES.
-GET    - http://127.0.0.1:8000/api/leads/{id} - MOSTRAR INFORMACIÓN DEL LEAD SELECCIONADO.
-POST   - http://127.0.0.1:8000/api/leads      - CREACIÓN DE UN NUEVO LEAD (PASAR UN OBJETO JSON CON LOS DATOS "name","email", "phone").
-PUT    - http://127.0.0.1:8000/api/leads/{id} - EDITARINFORMACIÓN DE UN LEAD (SE TRASLADA EN CASCADA A LOS CLIENTS, PASAR UN OBJETO JSON CON LOS DATOS "name","email", "phone").
-DELETE - http://127.0.0.1:8000/api/leads/{id} - ELIMINACIÓN DEL LEAD SELECCIONADO.
+''GET    - http://127.0.0.1:8000/api/leads      - LISTAR LOS LEADS EXISTENTES.''
+''GET    - http://127.0.0.1:8000/api/leads/{id} - MOSTRAR INFORMACIÓN DEL LEAD SELECCIONADO.''
+''POST   - http://127.0.0.1:8000/api/leads      - CREACIÓN DE UN NUEVO LEAD (PASAR UN OBJETO JSON CON LOS DATOS "name","email", "phone").''
+''PUT    - http://127.0.0.1:8000/api/leads/{id} - EDITARINFORMACIÓN DE UN LEAD (SE TRASLADA EN CASCADA A LOS CLIENTS, PASAR UN OBJETO JSON CON LOS DATOS "name","email", "phone").''
+''DELETE - http://127.0.0.1:8000/api/leads/{id} - ELIMINACIÓN DEL LEAD SELECCIONADO.''
 
 
 
